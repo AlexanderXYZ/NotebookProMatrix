@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">notebook PRo</string>
+
+
+    <string name="dialog_button_name_visibility_current_tasks">Show only current tasks</string>
+    <string name="dialog_button_name_visibility_all_tasks">Show all tasks</string>
+
+    <string name="dialog_button_name_filter">Filter</string>
+    <string name="dialog_title_filters">Filters</string>
+
+    <string name="dialog_button_name_cancel">Cancel</string>
+
+    <string name="dialog_button_name_sorting">Sorting</string>
+    <string name="dialog_title_sorted_by">Sorted by</string>
+
+    <string name="dialog_button_name_delete_all">Delete all</string>
+    <string name="dialog_button_name_delete_completed">Delete completed</string>
+    <string name="dialog_title_delete_all_tasks">Delete all tasks?</string>
+
+
+</resources>
