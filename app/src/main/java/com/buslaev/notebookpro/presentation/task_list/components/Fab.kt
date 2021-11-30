@@ -1,20 +1,18 @@
 package com.buslaev.notebookpro.presentation.task_list.components
 
-import android.util.Log
+import android.content.res.Resources
+import android.content.res.loader.ResourcesProvider
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -23,14 +21,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.buslaev.notebookpro.common.Constants.IMPORTANT_NOT_URGENT
-import com.buslaev.notebookpro.common.Constants.IMPORTANT_URGENT
-import com.buslaev.notebookpro.common.Constants.NOT_IMPORTANT_NOT_URGENT
-import com.buslaev.notebookpro.common.Constants.NOT_IMPORTANT_URGENT
+import com.buslaev.notebookpro.R
 import com.buslaev.notebookpro.presentation.task_list.Tasks
 import com.buslaev.notebookpro.presentation.theme.colorImportantNotUrgent
 import com.buslaev.notebookpro.presentation.theme.colorImportantUrgent
@@ -50,26 +46,34 @@ fun MultiFabAddTask(
     }
 
     val items = listOf(
-        MultiFabItem(Tasks.IMPORTANT_URGENT,
+        MultiFabItem(
+            Tasks.IMPORTANT_URGENT,
             "",
             color = colorImportantUrgent,
             x = -(80).dp,
-            y = 0.dp),
-        MultiFabItem(Tasks.IMPORTANT_NOT_URGENT,
+            y = 0.dp
+        ),
+        MultiFabItem(
+            Tasks.IMPORTANT_NOT_URGENT,
             "",
             color = colorImportantNotUrgent,
             x = -(35).dp,
-            y = -(45).dp),
-        MultiFabItem(Tasks.NOT_IMPORTANT_URGENT,
+            y = -(45).dp
+        ),
+        MultiFabItem(
+            Tasks.NOT_IMPORTANT_URGENT,
             "",
             color = colorNotImportantUrgent,
             x = 35.dp,
-            y = -(45).dp),
-        MultiFabItem(Tasks.NOT_IMPORTANT_NOT_URGENT,
+            y = -(45).dp
+        ),
+        MultiFabItem(
+            Tasks.NOT_IMPORTANT_NOT_URGENT,
             "",
             color = colorNotImportantNotUrgent,
             x = 80.dp,
-            y = 0.dp)
+            y = 0.dp
+        )
     )
 
     val scale: Float by transition.animateFloat(label = "") { state ->
@@ -86,15 +90,17 @@ fun MultiFabAddTask(
     Box(contentAlignment = Alignment.Center) {
         Box(modifier = Modifier.offset(y = -(32).dp)) {
             items.forEach { item ->
-                Box(modifier = Modifier
-                    .offset(x = item.x, y = item.y)
-                    .size(32.dp)
-                    .clip(CircleShape)
+                Box(
+                    modifier = Modifier
+                        .offset(x = item.x, y = item.y)
+                        .size(32.dp)
+                        .clip(CircleShape)
                 ) {
                     MiniFloatingActionButton(
                         item = item,
                         buttonScale = scale,
                         iconAlpha = alpha,
+                        color = item.color,
                         onActionClicked = {
                             onFabItemClicked(it)
                         }
@@ -124,19 +130,19 @@ fun MiniFloatingActionButton(
     item: MultiFabItem,
     buttonScale: Float,
     iconAlpha: Float,
+    color: Color,
     onActionClicked: (item: MultiFabItem) -> Unit,
 ) {
-    val buttonColor = MaterialTheme.colors.secondary
 
-    Canvas(modifier = Modifier
-        .size(32.dp)
-        .clickable(onClick = {
-            onActionClicked(item)
-            Log.d("dawdadw", "canvas click ${item.identifier}")
-        })
+    Canvas(
+        modifier = Modifier
+            .size(42.dp)
+            .clickable(onClick = {
+                onActionClicked(item)
+            })
     ) {
         drawCircle(
-            color = buttonColor,
+            color = color,
             radius = buttonScale
         )
 //        drawImage(

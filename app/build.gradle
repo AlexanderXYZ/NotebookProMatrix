@@ -124,4 +124,6 @@ dependencies {
     //RevealSwipe
     implementation 'de.charlex.compose:revealswipe:1.0.0'
 
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
+
 }

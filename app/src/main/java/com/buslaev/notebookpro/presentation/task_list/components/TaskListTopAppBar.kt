@@ -4,6 +4,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -13,14 +14,14 @@ fun TaskListTopAppBar(
     scaffoldState: ScaffoldState
 ) {
     TopAppBar(
-        navigationIcon = {
-            IconButton(
-                onClick = { scope.launch { scaffoldState.drawerState.open() } },
-                content = { Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu") })
-
-        },
+//        navigationIcon = {
+//            IconButton(
+//                onClick = { scope.launch { scaffoldState.drawerState.open() } },
+//                content = { Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu") })
+//
+//        },
         title = {
-            Text(text = "Notebook Pro")
+            Text(text = "Notebook Pro",color = Color.Black)
         }
     )
 }

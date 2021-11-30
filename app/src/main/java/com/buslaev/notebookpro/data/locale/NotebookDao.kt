@@ -19,6 +19,9 @@ interface NotebookDao {
     @Delete
     suspend fun deleteImportantUrgentTask(value: ImportantUrgentTask)
 
+    @Query("UPDATE important_urgent_tasks SET done = :done WHERE id = :id")
+    suspend fun updateImportantUrgentTask(id:Int, done:Int)
+
     /*
         Important Not Urgent
      */
@@ -31,6 +34,9 @@ interface NotebookDao {
 
     @Delete
     suspend fun deleteImportantNotUrgentTask(value: ImportantNotUrgentTask)
+
+    @Query("UPDATE important_not_urgent_tasks SET done = :done WHERE id = :id")
+    suspend fun updateImportantNotUrgentTask(id:Int, done:Int)
 
     /*
         Not Important Urgent
@@ -45,6 +51,9 @@ interface NotebookDao {
     @Delete
     suspend fun deleteNotImportantUrgentTask(value: NotImportantUrgentTask)
 
+    @Query("UPDATE important_not_urgent_tasks SET done = :done WHERE id = :id")
+    suspend fun updateNotImportantUrgentTask(id:Int, done:Int)
+
     /*
         Not Important Not Urgent
     */
@@ -58,6 +67,9 @@ interface NotebookDao {
     @Delete
     suspend fun deleteNotImportantNotUrgentTask(value: NotImportantNotUrgentTask)
 
+    @Query("UPDATE not_important_not_urgent_tasks SET done = :done WHERE id = :id")
+    suspend fun updateNotImportantNotUrgentTask(id:Int, done:Int)
+
     /*
         Category
      */
@@ -70,4 +82,16 @@ interface NotebookDao {
     @Delete
     suspend fun deleteCategory(value: Category)
 
+
+    /*
+    Delete all tasks
+     */
+    @Query("DELETE FROM important_urgent_tasks")
+    suspend fun deleteAlliu()
+    @Query("DELETE FROM important_not_urgent_tasks")
+    suspend fun deleteAllinu()
+    @Query("DELETE FROM not_important_urgent_tasks")
+    suspend fun deleteAllniu()
+    @Query("DELETE FROM not_important_not_urgent_tasks")
+    suspend fun deleteAllninu()
 }

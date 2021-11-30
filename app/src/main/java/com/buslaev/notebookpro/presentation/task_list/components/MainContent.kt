@@ -77,7 +77,6 @@ fun FirstPage(
 ) {
     val importantUrgent by viewModel.stateImportantUrgent.collectAsState()
     val notImportantUrgent by viewModel.stateNotImportantUrgent.collectAsState()
-    Log.d("dawda", notImportantUrgent.toString())
 
     Column(
         modifier = Modifier
@@ -95,7 +94,8 @@ fun FirstPage(
             ColumnContent(
                 title = "Important Urgent",
                 color = colorImportantUrgent,
-                taskState = importantUrgent
+                taskState = importantUrgent,
+                viewModel = viewModel
             )
         }
 
@@ -109,7 +109,8 @@ fun FirstPage(
             ColumnContent(
                 title = "Not Important Urgent",
                 color = colorNotImportantUrgent,
-                taskState = notImportantUrgent
+                taskState = notImportantUrgent,
+                viewModel = viewModel
             )
         }
     }
@@ -140,7 +141,8 @@ fun SecondPage(
             ColumnContent(
                 title = "Important Not Urgent",
                 color = colorImportantNotUrgent,
-                taskState = importantNotUrgent
+                taskState = importantNotUrgent,
+                viewModel = viewModel
             )
         }
 
@@ -154,7 +156,8 @@ fun SecondPage(
             ColumnContent(
                 title = "Not Important Not Urgent",
                 color = colorNotImportantNotUrgent,
-                taskState = notImportantNotUrgent
+                taskState = notImportantNotUrgent,
+                viewModel = viewModel
             )
         }
 
@@ -185,7 +188,8 @@ fun BoxMatrix(
 fun ColumnContent(
     title: String,
     color: Color,
-    taskState: TaskListState
+    taskState: TaskListState,
+    viewModel: TaskListViewModel
 ) {
     Column(Modifier.fillMaxSize()) {
         Text(
@@ -203,7 +207,18 @@ fun ColumnContent(
         LazyColumn {
             items(taskState.tasks) { task ->
                 Box(modifier = Modifier.fillMaxWidth()) {
-                    TaskItem(task = task, onCheckedClick = {}, onClick = {})
+                    TaskItem(
+                        task = task,
+                        onCheckedClick = {
+                            viewModel.compliteTask(it)
+                        },
+                        onDone = {
+                            viewModel.compliteTask(it)
+                        },
+                        onDelete = {
+                            viewModel.deleteTask(it, color)
+                        }
+                    )
                 }
             }
         }

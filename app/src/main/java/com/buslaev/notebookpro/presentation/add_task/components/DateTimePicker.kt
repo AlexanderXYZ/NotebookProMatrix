@@ -2,6 +2,7 @@ package com.buslaev.notebookpro.presentation.add_task.components
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.MaterialDialogState
 import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
@@ -19,8 +20,8 @@ fun DatePicker(
     MaterialDialog(
         dialogState = dialogState,
         buttons = {
-            positiveButton(text = "Ok", onClick = { returnDate(dateString) })
-            negativeButton(text = "Cancel")
+            positiveButton(text = "Ok", onClick = { returnDate(dateString) },textStyle = TextStyle(color = Color.Black))
+            negativeButton(text = "Cancel",textStyle = TextStyle(color = Color.Black))
         }
     ) {
         datepicker(
@@ -44,8 +45,8 @@ fun TimePicker(
     MaterialDialog(
         dialogState = dialogState,
         buttons = {
-            positiveButton(text = "Ok", onClick = { returnTime(timeString) })
-            negativeButton(text = "Cancel")
+            positiveButton(text = "Ok", onClick = { returnTime(timeString) },textStyle = TextStyle(color = Color.Black))
+            negativeButton(text = "Cancel",textStyle = TextStyle(color = Color.Black))
         }
     ) {
         timepicker(

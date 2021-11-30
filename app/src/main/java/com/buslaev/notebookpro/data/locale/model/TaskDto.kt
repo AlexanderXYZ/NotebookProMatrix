@@ -27,6 +27,6 @@ fun TaskDto.toTask(): Task {
         repeats = repeats,
         categoryId = categoryId,
         categoryTitle = categoryTitle,
-        done = done != 0
+        done = done == 1
     )
 }

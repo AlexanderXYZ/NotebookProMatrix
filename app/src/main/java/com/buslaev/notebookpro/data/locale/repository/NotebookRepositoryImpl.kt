@@ -24,6 +24,10 @@ class NotebookRepositoryImpl @Inject constructor(
         dao.deleteImportantUrgentTask(task)
     }
 
+    override suspend fun updateImportantUrgentTask(id: Int, done: Int) {
+        dao.updateImportantUrgentTask(id, done)
+    }
+
     //  Important Not Urgent
 
     override fun getImportantNotUrgentTasks(): Flow<List<TaskDto>> {
@@ -36,6 +40,10 @@ class NotebookRepositoryImpl @Inject constructor(
 
     override suspend fun deleteImportantNotUrgentTask(task: ImportantNotUrgentTask) {
         dao.deleteImportantNotUrgentTask(task)
+    }
+
+    override suspend fun updateImportantNotUrgentTask(id: Int, done: Int) {
+        dao.updateImportantNotUrgentTask(id, done)
     }
 
     //  Not Important Urgent
@@ -52,6 +60,10 @@ class NotebookRepositoryImpl @Inject constructor(
         dao.deleteNotImportantUrgentTask(task)
     }
 
+    override suspend fun updateNotImportantUrgentTask(id: Int, done: Int) {
+        dao.updateNotImportantUrgentTask(id, done)
+    }
+
     //  Not Important Not Urgent
 
     override fun getNotImportantNotUrgentTasks(): Flow<List<TaskDto>> {
@@ -64,6 +76,10 @@ class NotebookRepositoryImpl @Inject constructor(
 
     override suspend fun deleteNotImportantNotUrgentTask(task: NotImportantNotUrgentTask) {
         deleteNotImportantNotUrgentTask(task)
+    }
+
+    override suspend fun updateNotImportantNotUrgentTask(id: Int, done: Int) {
+        dao.updateNotImportantNotUrgentTask(id, done)
     }
 
     //  Category
@@ -79,4 +95,21 @@ class NotebookRepositoryImpl @Inject constructor(
     override suspend fun deleteCategory(category: Category) {
         dao.deleteCategory(category)
     }
+
+    override suspend fun deleteAlliu() {
+        dao.deleteAlliu()
+    }
+
+    override suspend fun deleteAllinu() {
+        dao.deleteAllinu()
+    }
+
+    override suspend fun deleteAllniu() {
+        dao.deleteAllniu()
+    }
+
+    override suspend fun deleteAllninu() {
+        dao.deleteAllninu()
+    }
+
 }

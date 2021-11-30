@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.buslaev.notebookpro.presentation.add_task.components.ContentAddTask
 import com.buslaev.notebookpro.presentation.task_list.components.*
@@ -42,6 +43,9 @@ fun TaskList(
     var color by remember { mutableStateOf(Color.Red) }
     var tasks by remember { mutableStateOf(Tasks.IMPORTANT_URGENT) }
 
+    val categoriesViewModel: CategoriesViewModel = hiltViewModel()
+    val viewModel: TaskListViewModel = hiltViewModel()
+
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetContent = {
@@ -65,9 +69,9 @@ fun TaskList(
                     scaffoldState = scaffoldState
                 )
             },
-            drawerContent = {
-                TaskListDrawerContent()
-            },
+//            drawerContent = {
+//                TaskListDrawerContent()
+//            },
             floatingActionButton = {
                 MultiFabAddTask(
                     toState = toState,
@@ -119,23 +123,34 @@ fun TaskList(
     )
     FilterDialog(
         dialogState = dialogFilterState,
+        viewModel = categoriesViewModel,
         returnSelectedItems = {
-
+            viewModel.filterList(it)
         }
     )
     SortingDialog(
         dialogState = dialogSortState,
         returnSelectedSort = {
-
+            when (it) {
+                0 -> {
+                    viewModel.sortByABC()
+                }
+                1 -> {
+                    viewModel.sortByDateErlier()
+                }
+                2 -> {
+                    viewModel.sortByDateLates()
+                }
+            }
         }
     )
     DeleteAllDialog(
         dialogState = dialogDeleteAllState,
         deleteCompletedTasks = {
-
+            viewModel.deleteAllCompliteTask()
         },
         deleteAllTasks = {
-
+            viewModel.deleteAllTask()
         }
     )
 

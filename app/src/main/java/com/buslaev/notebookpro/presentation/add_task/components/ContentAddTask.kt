@@ -100,14 +100,14 @@ fun ContentAddTask(
 
         SmallSpacerHeight()
 
-        RowItem(
-            value = repeat,
-            onClick = { },
-            icon = Icons.Filled.Repeat,
-            contentDescription = "Repeat",
-            color = color,
-            labelText = "Repeat"
-        )
+//        RowItem(
+//            value = repeat,
+//            onClick = { },
+//            icon = Icons.Filled.Repeat,
+//            contentDescription = "Repeat",
+//            color = color,
+//            labelText = "Repeat"
+//        )
 
         SmallSpacerHeight()
 
@@ -169,7 +169,8 @@ fun TitleTextField(
                 cursorColor = color,
                 focusedIndicatorColor = color,
                 focusedLabelColor = color,
-                backgroundColor = Color.White
+                backgroundColor = Color.White,
+                textColor = color
             ),
             isError = titleError
         )
@@ -301,7 +302,8 @@ fun OutlinedTextFieldAndDropDownMenu(
                 cursorColor = color,
                 focusedIndicatorColor = color,
                 focusedLabelColor = color,
-                backgroundColor = Color.White
+                backgroundColor = Color.White,
+                textColor = Color.Black
             ),
             readOnly = true
         )
@@ -318,7 +320,7 @@ fun OutlinedTextFieldAndDropDownMenu(
                         category.categoryId?.let { onChoosed(category.categoryId!!) }
                     }
                 ) {
-                    Text(text = category.categoryTitle)
+                    Text(text = category.categoryTitle,color = Color.Black)
                 }
             }
         }

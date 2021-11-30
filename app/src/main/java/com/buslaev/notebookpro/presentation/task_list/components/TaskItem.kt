@@ -1,5 +1,7 @@
 package com.buslaev.notebookpro.presentation.task_list.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,8 +27,9 @@ import de.charlex.compose.RevealSwipe
 @Composable
 fun TaskItem(
     task: Task,
-    onCheckedClick: () -> Unit,
-    onClick: () -> Unit,
+    onCheckedClick: (Task) -> Unit,
+    onDone: (Task) -> Unit,
+    onDelete: (Task) -> Unit
 ) {
     var checkedState by remember { mutableStateOf(task.done) }
 
@@ -34,9 +38,13 @@ fun TaskItem(
         directions = setOf(RevealDirection.StartToEnd),
         hiddenContentStart = {
             ActionRow(
-                onDone = { },
+                onDone = {
+                    onDone(task)
+                },
                 onMove = { },
-                onDelete = { }
+                onDelete = {
+                    onDelete(task)
+                }
             )
         },
         content = {
@@ -54,22 +62,27 @@ fun TaskItem(
                         checked = checkedState,
                         onCheckedChange = {
                             checkedState = !checkedState
-                            onCheckedClick()
+                            onCheckedClick(task)
                         }
                     )
 
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Column {
-                        Text(text = task.title, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                        Text(
+                            text = task.title,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
+                        )
                         if (task.completionDate.isNotEmpty()) {
                             Text(
                                 text = "${task.completionDate}, ${task.completionTime}",
-                                fontSize = 12.sp
+                                fontSize = 12.sp, color = Color.Black
                             )
                         }
                         if (task.categoryId != null) {
-                            Text(text = task.categoryTitle, fontSize = 12.sp)
+                            Text(text = task.categoryTitle, fontSize = 12.sp, color = Color.Black)
                         }
                     }
                 }
@@ -88,8 +101,25 @@ fun ActionRow(
     val iconMove = Icons.Filled.DriveFileMove
     val iconDelete = Icons.Filled.DeleteOutline
     Row() {
-        Icon(imageVector = iconDone, contentDescription = "Done")
-        Icon(imageVector = iconMove, contentDescription = "Move")
-        Icon(imageVector = iconDelete, contentDescription = "Delete")
+        Spacer(modifier = Modifier.width(6.dp))
+
+        Icon(imageVector = iconDone, contentDescription = "Done", modifier = Modifier.clickable {
+            onDone()
+        })
+
+        Spacer(modifier = Modifier.width(6.dp))
+
+//        Icon(imageVector = iconMove, contentDescription = "Move")
+//
+//        Spacer(modifier = Modifier.width(6.dp))
+
+        Icon(
+            imageVector = iconDelete,
+            contentDescription = "Delete",
+            modifier = Modifier.clickable {
+                onDelete()
+            })
+
+        Spacer(modifier = Modifier.width(6.dp))
     }
 }
